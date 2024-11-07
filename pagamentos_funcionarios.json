@@ -1,0 +1,12 @@
+[
+  {
+    "funcionarioId": 1,
+    "valorPago": 12.0,
+    "dataPagamento": "Nov 5, 2024, 4:37:14 PM"
+  },
+  {
+    "funcionarioId": 4,
+    "valorPago": 2323.0,
+    "dataPagamento": "Nov 5, 2024, 4:53:19 PM"
+  }
+]
