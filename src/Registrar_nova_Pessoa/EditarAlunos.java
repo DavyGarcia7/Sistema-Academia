@@ -17,17 +17,14 @@ public class EditarAlunos {
     private static final String ARQUIVO_ALUNOS = "pessoas.json";
     private static final Scanner scanner = new Scanner(System.in);
 
-    // Método para editar um aluno existente
-    public static void editarAluno() {
+    // Método para editar um aluno existente com base no ID
+    public static void editarAluno(int id) {
         List<SCadastroAluno> alunos = carregarAlunos();
-        if (alunos.isEmpty()) {
+        
+        if (alunos == null || alunos.isEmpty()) {  // Verificar se a lista é nula ou vazia
             System.out.println("Não há alunos registrados para editar.");
             return;
         }
-
-        System.out.print("Digite o ID do aluno que deseja editar: ");
-        int id = scanner.nextInt();
-        scanner.nextLine(); // Consumir a quebra de linha
 
         SCadastroAluno alunoEncontrado = null;
         for (SCadastroAluno aluno : alunos) {
@@ -71,10 +68,16 @@ public class EditarAlunos {
         try (BufferedReader br = new BufferedReader(new FileReader(ARQUIVO_ALUNOS))) {
             Gson gson = new Gson();
             Type listType = new TypeToken<List<SCadastroAluno>>() {}.getType();
-            return gson.fromJson(br, listType) != null ? gson.fromJson(br, listType) : new ArrayList<>();
+            List<SCadastroAluno> alunos = gson.fromJson(br, listType);
+
+            // Garantir que a lista seja inicializada mesmo se estiver vazia
+            if (alunos == null) {
+                alunos = new ArrayList<>();
+            }
+            return alunos;
         } catch (IOException e) {
             System.out.println("Erro ao carregar alunos: " + e.getMessage());
-            return new ArrayList<>();
+            return new ArrayList<>();  // Retorna lista vazia em caso de erro
         }
     }
 

@@ -17,17 +17,14 @@ public class EditarFuncionario {
     private static final String ARQUIVO_FUNCIONARIOS = "funcionarios.json";
     private static final Scanner scanner = new Scanner(System.in);
 
-    // Método para editar um funcionário existente
-    public static void editarFuncionarios() {
+    // Método para editar um funcionário existente com base no ID
+    public static void editarFuncionarios(int id) {
         List<SCadastrofuncionario> funcionarios = carregarFuncionarios();
-        if (funcionarios.isEmpty()) {
+        
+        if (funcionarios == null || funcionarios.isEmpty()) {  // Verifica se a lista é nula ou vazia
             System.out.println("Não há funcionários registrados para editar.");
             return;
         }
-
-        System.out.print("Digite o ID do funcionário que deseja editar: ");
-        int id = scanner.nextInt();
-        scanner.nextLine(); // Consumir a quebra de linha
 
         SCadastrofuncionario funcionarioEncontrado = null;
         for (SCadastrofuncionario funcionario : funcionarios) {
@@ -67,10 +64,16 @@ public class EditarFuncionario {
         try (BufferedReader br = new BufferedReader(new FileReader(ARQUIVO_FUNCIONARIOS))) {
             Gson gson = new Gson();
             Type listType = new TypeToken<List<SCadastrofuncionario>>() {}.getType();
-            return gson.fromJson(br, listType) != null ? gson.fromJson(br, listType) : new ArrayList<>();
+            List<SCadastrofuncionario> funcionarios = gson.fromJson(br, listType);
+
+            // Garantir que a lista seja inicializada mesmo se estiver vazia
+            if (funcionarios == null) {
+                funcionarios = new ArrayList<>();
+            }
+            return funcionarios;
         } catch (IOException e) {
             System.out.println("Erro ao carregar funcionários: " + e.getMessage());
-            return new ArrayList<>();
+            return new ArrayList<>();  // Retorna lista vazia em caso de erro
         }
     }
 

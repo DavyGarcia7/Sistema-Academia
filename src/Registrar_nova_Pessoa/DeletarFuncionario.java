@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Iterator;
 
-public class DeletarFuncionario {
+public class DeletarFuncionario extends Pessoa{
     private static final String NOME_ARQUIVO = "funcionarios.json";
     private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
@@ -59,5 +59,9 @@ public class DeletarFuncionario {
         } catch (IOException e) {
             System.out.println("Erro ao salvar o arquivo: " + e.getMessage());
         }
+    }
+
+    public DeletarFuncionario(String nome, String cpf, String cpf1, String senha) {
+        super(nome, cpf, cpf1, senha);
     }
 }

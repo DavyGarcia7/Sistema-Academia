@@ -65,13 +65,15 @@ public class AreaLogin {
 
     private void editarAluno(Scanner scanner) {
         System.out.print("Digite o ID do aluno a ser editado: ");
-        String idA = scanner.nextLine(); // Lê o ID como String
-        gestaoCadastroFacade.editarAluno(idA);
+        int idA = scanner.nextInt();
+        scanner.nextLine(); // Consumir a quebra de linha
+        gestaoCadastroFacade.editarAluno(idA); // Passa o ID para o método de edição
     }
 
     private void editarFuncionario(Scanner scanner) {
         System.out.print("Digite o ID do funcionário a ser editado: ");
-        String idF = scanner.nextLine(); // Lê o ID como String
-        gestaoCadastroFacade.editarFuncionario(idF);
+        int idF = scanner.nextInt();
+        scanner.nextLine(); // Consumir a quebra de linha
+        gestaoCadastroFacade.editarFuncionario(idF); // Passa o ID para o método de edição
     }
 }

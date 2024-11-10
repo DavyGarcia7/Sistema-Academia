@@ -5,9 +5,11 @@
     "cpf": "ID10001"
   },
   {
-    "nome": "Bruno Silva",
+    "setor": "Banco",
+    "horarios": "323",
+    "nome": "bruno",
     "id": 2,
-    "cpf": "ID10002"
+    "cpf": "24232"
   },
   {
     "nome": "Daniel Rocha",
