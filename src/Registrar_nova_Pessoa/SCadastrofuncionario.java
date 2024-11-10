@@ -17,9 +17,9 @@ public class SCadastrofuncionario extends Pessoa {
     private String setor;
     private String horarios;
     
-    // Construtor ajustado para incluir setor e horarios
-    public SCadastrofuncionario(String nome, String id, String cpf, String senha, String setor, String horarios) {
-        super(nome, id, cpf, senha);
+    // Construtor ajustado para incluir `id` como int, `setor`, e `horarios`
+    public SCadastrofuncionario(String nome, int id, String cpf, String senha, String setor, String horarios) {
+        super(nome, id, cpf, senha); // `id` agora é um int
         this.setor = setor;
         this.horarios = horarios;
     }
@@ -50,17 +50,21 @@ public class SCadastrofuncionario extends Pessoa {
             Gson gson = new Gson();
             Type listType = new TypeToken<List<SCadastrofuncionario>>() {}.getType();
             funcionarios = gson.fromJson(br, listType);
+            if (funcionarios == null) {
+                funcionarios = new ArrayList<>();
+            }
         } catch (IOException e) {
             // Se o arquivo não existir, começamos com uma nova lista
             System.out.println("Arquivo não encontrado, começando uma nova lista.");
+            funcionarios = new ArrayList<>();
         }
 
         // Solicitar dados do funcionário
         System.out.print("Digite o nome: ");
         String nome = scanner.nextLine();
         
-        System.out.print("Digite o ID: ");
-        String id = scanner.nextLine();
+        // Gerar um ID único como inteiro
+        int id = funcionarios.size() + 1; // ID numérico baseado no tamanho da lista existente
         
         System.out.print("Digite o CPF: ");
         String cpf = scanner.nextLine();
@@ -69,22 +73,21 @@ public class SCadastrofuncionario extends Pessoa {
         String senha = scanner.nextLine();
         
         System.out.print("Digite o setor:\n1. Novo Instrutor\n2. Novo Auxiliar de Limpeza\n3. Novo Secretario/Balconista\n4. Sair\nOpção: ");
-            String opção = scanner.nextLine();
-            String setor = switch (opção) {
-                case "1" -> "Instrutor";
-                case "2" -> "Auxiliar de Limpeza";
-                case "3" -> "Secretario/Balconista";
-                case "4" -> "Sair";
-                default -> "Opção inválida";
-            };
+        String opcao = scanner.nextLine();
+        String setor = switch (opcao) {
+            case "1" -> "Instrutor";
+            case "2" -> "Auxiliar de Limpeza";
+            case "3" -> "Secretario/Balconista";
+            case "4" -> "Sair";
+            default -> "Opção inválida";
+        };
 
-            if (!setor.equals("Opção inválida") && !setor.equals("Sair")) {
-                 System.out.println("Setor selecionado: " + setor);
-            } else if (setor.equals("Opção inválida")) {
-                System.out.println("Opção inválida");
-            }
-        
-        
+        if (!setor.equals("Opção inválida") && !setor.equals("Sair")) {
+            System.out.println("Setor selecionado: " + setor);
+        } else if (setor.equals("Opção inválida")) {
+            System.out.println("Opção inválida");
+            return; // Encerrar a função em caso de opção inválida
+        }
         
         System.out.print("Digite os horários: ");
         String horarios = scanner.nextLine();

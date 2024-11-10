@@ -61,7 +61,7 @@ public class DeletarFuncionario extends Pessoa{
         }
     }
 
-    public DeletarFuncionario(String nome, String cpf, String cpf1, String senha) {
-        super(nome, cpf, cpf1, senha);
-    }
+   public DeletarFuncionario(String nome, int id, String cpf, String senha) {
+    super(nome, id, cpf, senha);  
+}
 }

@@ -1,28 +1,19 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Registrar_nova_Pessoa;
 
-/**
- *
- * @author davyc joao pedro
- */
 public class Pessoa {
     private String nome;
-    int id;
+    protected int id;  // Alterado para protected para permitir acesso em subclasses
     private String cpf;
- 
-    
+    private String senha;
 
-    public Pessoa(String nome, String cpf, String cpf1, String senha) {
+    public Pessoa(String nome, int id, String cpf, String senha) {
         this.nome = nome;
         this.id = id;
         this.cpf = cpf;
-        
+        this.senha = senha;
     }
-    
 
+    // Getters e Setters para acessar os campos privados, se necessário
     public String getNome() {
         return nome;
     }
@@ -47,14 +38,10 @@ public class Pessoa {
         this.cpf = cpf;
     }
 
-    
+    public String getSenha() {
+        return senha;
+    }
 
-@Override
-    public String toString() {
-        return "Pessoa{" +
-                "nome='" + nome + '\'' +
-                ", id=" + id +
-                ", cpf='" + cpf + '\'' +
-                '}';
-}
-}
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }}

@@ -10,7 +10,7 @@ package Loja;
  */
 public class ProdutosLoja {
     private String setor;
-    private int id;
+    protected int id;
     private String nome;
     private int quantidade;
     private double preco;
