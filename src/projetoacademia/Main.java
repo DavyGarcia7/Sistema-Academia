@@ -21,7 +21,6 @@ public class Main {
         AreaFinancas areaFinancas = new AreaFinancas(processadorPagamento); // Instância de área financeira
         AreaAgendamento areaAgendamento = new AreaAgendamento(); // Instância de agendamento
         
-        
         while (true) {  
             
             System.out.println("=== Academia do Vale ===");
