@@ -28,8 +28,7 @@ public class AreaLogin {
                 case 1 -> gestaoCadastroFacade.cadastrarAluno(); // Cadastro de aluno
                 case 2 -> gestaoCadastroFacade.cadastrarFuncionario(); // Cadastro de funcionário
                 case 3 -> deletarPessoa(scanner); // Excluir aluno ou funcionário
-                case 4 -> {
-                    System.out.println("Saindo do sistema...");
+                case 4 -> {                    
                     return;
                 }
                 default -> System.out.println("Opção inválida, tente novamente.");

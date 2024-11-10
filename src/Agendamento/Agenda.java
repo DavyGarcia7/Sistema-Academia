@@ -1,5 +1,6 @@
 package Agendamento;
 
+import static Pagamento.ProcessadorPagamento.processadorPagamento;
 import Registrar_nova_Pessoa.SCadastroAluno;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -14,21 +15,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-
-
 public class Agenda {
+    private GerenciadorMensalidades gerenciadorMensalidades;
     private final List<Agendamento> agendamentos;
     private List<SCadastroAluno> alunos;
     private Scanner scanner;
 
+    // Variáveis de instância para armazenar o alunoId e preço
+    private int aluno;
+    private double preco1;
+
     public Agenda() {
+        this.gerenciadorMensalidades = new GerenciadorMensalidades(processadorPagamento);
         this.agendamentos = new ArrayList<>();
         this.alunos = new ArrayList<>();
-        this.scanner = new Scanner(System.in); // Inicialize o Scanner aqui
+        this.scanner = new Scanner(System.in);
     }
 
-    public void agendar() { // Alterado de static para instância
-        carregarAlunos(); // Método chamado corretamente
+    public void agendar() {
+        carregarAlunos();
 
         System.out.println("=== Sistema de Agendamento ===");
         if (alunos.isEmpty()) {
@@ -42,10 +47,10 @@ public class Agenda {
         }
         System.out.print("Escolha um número: ");
 
-        if (!scanner.hasNextInt()) { 
+        if (!scanner.hasNextInt()) {
             System.out.println("Entrada inválida. Por favor, insira um número.");
-            scanner.nextLine(); // Limpa a entrada
-            return; 
+            scanner.nextLine();
+            return;
         }
 
         int alunoIndex = scanner.nextInt() - 1;
@@ -56,25 +61,27 @@ public class Agenda {
         }
 
         SCadastroAluno aluno = alunos.get(alunoIndex);
-        scanner.nextLine(); // Limpa o buffer
+        this.aluno = aluno.getId(); // Armazenamos o ID do aluno
+        scanner.nextLine();
+
         System.out.print("Tipo de Aula (spinning, musculação, fit dance, pilates): ");
         String tipoAula = scanner.nextLine();
         System.out.print("Data do Agendamento (dd/MM/yyyy): ");
         String data = scanner.nextLine();
         System.out.print("Preço: ");
 
-        if (!scanner.hasNextDouble()) { 
+        if (!scanner.hasNextDouble()) {
             System.out.println("Entrada inválida para o preço.");
-            scanner.nextLine(); // Limpa a entrada
-            return; 
+            scanner.nextLine();
+            return;
         }
 
-        double preco = scanner.nextDouble();
-        scanner.nextLine(); // Limpa o buffer
+        preco1 = scanner.nextDouble(); // Armazenamos o preço
+        scanner.nextLine();
         System.out.print("Instrutor: ");
         String instrutor = scanner.nextLine();
 
-        Agendamento agendamento = new Agendamento(aluno, tipoAula, data, preco, instrutor);
+        Agendamento agendamento = new Agendamento(aluno, tipoAula, data, preco1, instrutor);
         agendamentos.add(agendamento);
         System.out.println("Agendamento adicionado com sucesso para " + aluno.getNome());
         salvarAgendamentos();
@@ -106,5 +113,16 @@ public class Agenda {
             System.err.println("Erro ao salvar os agendamentos: " + e.getMessage());
         }
     }
-}
 
+    // Método para adicionar mensalidade de um aluno
+   public void adicionarMensalidadeAula() {
+        System.out.print("Digite o ID do aluno: ");
+        int alunoId = aluno;
+        if (gerenciadorMensalidades.verificarAlunoRegistrado(alunoId)) {           
+            double valor = preco1;
+            gerenciadorMensalidades.adicionarMensalidade(alunoId, valor);            
+        } else {
+            System.out.println("Aluno com ID " + alunoId + " não encontrado em pessoas.json.");
+        }
+    }
+}

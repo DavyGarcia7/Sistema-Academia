@@ -1,22 +1,27 @@
 package projetoacademia;
 
+import Financeiro.FinanceiroFacade;
 import Agendamento.AreaAgendamento;
 import Loja.AreaLoja;
 import Registrar_nova_Pessoa.AreaLogin;
 import Financeiro.AreaFinancas;
+import Financeiro.AutenticacaoAdministrador;
+import static Pagamento.ProcessadorPagamento.areaFinancas;
 import Pagamento.ProcessadorPagamentoImpl;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        AutenticacaoAdministrador autenticacao = new AutenticacaoAdministrador();
         Scanner scanner = new Scanner(System.in);  
         AreaLoja areaLoja = new AreaLoja();
           ProcessadorPagamentoImpl processadorPagamento = new ProcessadorPagamentoImpl();
-        AreaFinancas areaFinancas = new AreaFinancas(processadorPagamento);
+          FinanceiroFacade financeiroFacade = new FinanceiroFacade(processadorPagamento);
         AreaLogin areaLogin = new AreaLogin(processadorPagamento);
 
         
-        while (true) {            
+        while (true) {  
+            
             System.out.println("=== Academia do Vale ===");
             System.out.println("1. Registrar nova Pessoa");
             System.out.println("2. Gerenciamento de aulas");

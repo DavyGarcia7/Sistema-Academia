@@ -9,6 +9,7 @@ package Loja;
  * @author joaop
  */
 public class ProdutosLoja {
+    private String setor;
     private int id;
     private String nome;
     private int quantidade;
@@ -19,9 +20,18 @@ public class ProdutosLoja {
         this.nome = nome;
         this.quantidade = quantidade;
         this.preco = preco;
+        
     }
     public int getId(){
         return id;
+    }
+
+    public String getSetor() {
+        return setor;
+    }
+
+    public void setSetor(String setor) {
+        this.setor = setor;
     }
     public void setId(int id)
     {

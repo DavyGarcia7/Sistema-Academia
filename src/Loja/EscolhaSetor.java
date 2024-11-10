@@ -4,65 +4,51 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class AreaLoja {
+/**
+ *
+ * @author davy-garcia
+ */
+
+public class EscolhaSetor {
     private GerenciamentoProduto gerenciamentoProduto;
     private ConsultaEstoque consultaEstoque;
     private Scanner scanner;
 
-    public AreaLoja() {
+    public EscolhaSetor() {
         List<ProdutosLoja> produtos = new ArrayList<>();
         this.gerenciamentoProduto = new GerenciamentoProduto(produtos);
         this.consultaEstoque = new ConsultaEstoque(produtos);
         this.scanner = new Scanner(System.in);
     }
 
-    public void iniciar() {
-        boolean executando = true;
-
-        while (executando) {
+    public void escolhasetor() {
+        while (true) {
             System.out.println("=== Sistema de Gerenciamento de Loja ===");
-            System.out.println("1. Adicionar novo Produto");
-            System.out.println("2. Remover Produto");
-            System.out.println("3. Atualizar Quantidade de Produto");
-            System.out.println("4. Listar Produtos no Estoque");
-            System.out.println("5. Exportar Produtos para JSON");
-            System.out.println("6. Importar Produtos de JSON");
+            System.out.println("1. Loja");
+            System.out.println("2. Lanchonete");
             System.out.println("7. Sair");
             System.out.print("Escolha uma opção: ");
             int opcao = scanner.nextInt();
             scanner.nextLine(); // Consumir a quebra de linha
 
             switch (opcao) {
-                case 1:                   
+                case 1:
                     adicionarProduto();
                     break;
                 case 2:
                     removerProduto();
                     break;
-                case 3:
-                    atualizarQuantidade();
-                    break;
-                case 4:
-                    listarProdutos();
-                    break;
-                case 5:
-                    exportarParaJson();
-                    break;
-                case 6:
-                    importarDeJson();
-                    break;
                 case 7:
-                    System.out.println("Saindo do sistema...");
-                    executando = false; // Finaliza o loop
-                    break;
+                    System.out.println("Saindo do sistema.");
+                    return;
                 default:
-                    System.out.println("Opção inválida, tente novamente.");
+                    System.out.println("Opção inválida. Tente novamente.");
             }
         }
     }
 
     private void adicionarProduto() {
-        System.out.print("Digite o setor  (1 lanc): ");
+        System.out.print("Digite o setor (1 para Loja, 2 para Lanchonete): ");
         int setor = scanner.nextInt();
         System.out.print("Digite o ID do produto: ");
         int id = scanner.nextInt();
@@ -117,5 +103,10 @@ public class AreaLoja {
         System.out.println("Importando produtos do arquivo 'data/loja.json'...");
         gerenciamentoProduto.carregarProdutosDeArquivo();
         System.out.println("Produtos importados com sucesso.");
+    }
+
+    public static void main(String[] args) {
+        EscolhaSetor loja = new EscolhaSetor();
+        loja.escolhasetor();
     }
 }

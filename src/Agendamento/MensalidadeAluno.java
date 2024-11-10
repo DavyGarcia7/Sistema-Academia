@@ -1,4 +1,4 @@
-package Financeiro;
+package Agendamento;
 
 import java.util.Date;
 

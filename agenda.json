@@ -1,17 +1,9 @@
 [
   {
-    "nomeAluno": "Daniel Rocha",
-    "tipoAula": "dsfd",
-    "data": "sdfs",
-    "preco": 43.0,
-    "instrutor": "valter",
-    "confirmado": false
-  },
-  {
-    "nomeAluno": "Heitor Almeida",
-    "tipoAula": "dasd",
-    "data": "asdas",
-    "preco": 32.0,
+    "nomeAluno": "Felipe Gomes",
+    "tipoAula": "pilates",
+    "data": "34/5/23",
+    "preco": 60.0,
     "instrutor": "valter",
     "confirmado": false
   }

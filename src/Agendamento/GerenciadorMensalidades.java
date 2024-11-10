@@ -1,4 +1,4 @@
-package Financeiro;
+package Agendamento;
 
 import Pagamento.Cartao;
 import Pagamento.ProcessadorPagamento;
@@ -47,7 +47,7 @@ public class GerenciadorMensalidades {
 
     // Verifica se o aluno está registrado
     public boolean verificarAlunoRegistrado(int alunoId) {
-        try (FileReader reader = new FileReader("alunos.json")) {
+        try (FileReader reader = new FileReader("pessoas.json")) {
             Type listType = new TypeToken<List<Pessoa>>() {}.getType();
             List<Pessoa> alunos = gson.fromJson(reader, listType);
             return alunos.stream().anyMatch(aluno -> aluno.getId() == alunoId);
