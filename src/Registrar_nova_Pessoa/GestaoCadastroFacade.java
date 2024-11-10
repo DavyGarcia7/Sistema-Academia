@@ -16,7 +16,8 @@ public class GestaoCadastroFacade {
     }
 
     public void cadastrarFuncionario() {
-        SCadastrofuncionario.CadastroF();
+        // Implementação correta do cadastro de funcionário
+        SCadastrofuncionario.CadastroF(); // Chama o método de cadastro de funcionário
     }
 
     public void deletarAluno(int id) {
@@ -25,5 +26,13 @@ public class GestaoCadastroFacade {
 
     public void deletarFuncionario(int id) {
         DeletarFuncionario.deletarFuncionarioPorId(id);
+    }
+
+    public void editarAluno(String id) {
+        EditarAlunos.editarAluno();
+    }
+
+    public void editarFuncionario(String id) {
+        EditarFuncionario.editarFuncionarios();
     }
 }

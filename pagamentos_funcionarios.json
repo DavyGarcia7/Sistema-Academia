@@ -8,5 +8,10 @@
     "funcionarioId": 4,
     "valorPago": 2323.0,
     "dataPagamento": "Nov 5, 2024, 4:53:19 PM"
+  },
+  {
+    "funcionarioId": 1,
+    "valorPago": 232.0,
+    "dataPagamento": "Nov 10, 2024, 2:34:42 AM"
   }
 ]

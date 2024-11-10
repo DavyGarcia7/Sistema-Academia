@@ -13,12 +13,14 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         AutenticacaoAdministrador autenticacao = new AutenticacaoAdministrador();
-        Scanner scanner = new Scanner(System.in);  
+        Scanner scanner = new Scanner(System.in);
         AreaLoja areaLoja = new AreaLoja();
-          ProcessadorPagamentoImpl processadorPagamento = new ProcessadorPagamentoImpl();
-          FinanceiroFacade financeiroFacade = new FinanceiroFacade(processadorPagamento);
+        ProcessadorPagamentoImpl processadorPagamento = new ProcessadorPagamentoImpl();
+        FinanceiroFacade financeiroFacade = new FinanceiroFacade(processadorPagamento);
         AreaLogin areaLogin = new AreaLogin(processadorPagamento);
-
+        AreaFinancas areaFinancas = new AreaFinancas(processadorPagamento); // Instância de área financeira
+        AreaAgendamento areaAgendamento = new AreaAgendamento(); // Instância de agendamento
+        
         
         while (true) {  
             

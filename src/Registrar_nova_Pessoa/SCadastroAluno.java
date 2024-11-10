@@ -2,6 +2,10 @@ package Registrar_nova_Pessoa;
 
 import Pagamento.Cartao;
 import Pagamento.ProcessadorPagamento;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -10,9 +14,6 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 import java.util.InputMismatchException;
 
 public class SCadastroAluno extends Pessoa {
@@ -21,56 +22,22 @@ public class SCadastroAluno extends Pessoa {
     private String endereco;
     private String telefone;
 
-    public SCadastroAluno(String nome, String id, String cpf, String senha, String email, String endereco, String telefone) {
-        super(nome, id, cpf, senha);
+    public SCadastroAluno(String nome, int id, String cpf, String senha, String email, String endereco, String telefone) {
+        super(nome, cpf, senha);
+        this.id = id;
         this.email = email;
         this.endereco = endereco;
         this.telefone = telefone;
     }
 
-    // Getters e Setters
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
-
+    // Método para cadastro de aluno
     public static void CadastroA(ProcessadorPagamento processadorPagamento) {
         Scanner scanner = new Scanner(System.in);
-        List<SCadastroAluno> alunos = new ArrayList<>();
+        List<SCadastroAluno> alunos = carregarAlunos();
 
-        try (BufferedReader br = new BufferedReader(new FileReader("pessoas.json"))) {
-            Gson gson = new Gson();
-            Type listType = new TypeToken<List<SCadastroAluno>>() {}.getType();
-            alunos = gson.fromJson(br, listType);
+        // Gera um novo ID baseado no tamanho da lista de alunos
+        int novoId = alunos.size() + 1;
 
-            if (alunos == null) {
-                alunos = new ArrayList<>();
-            }
-        } catch (IOException e) {
-            System.out.println("Arquivo não encontrado, começando uma nova lista.");
-            alunos = new ArrayList<>();
-        }
-
-        String id = "ID" + (alunos.size() + 1);
         System.out.print("Digite o nome: ");
         String nome = scanner.nextLine();
         System.out.print("Digite o CPF: ");
@@ -91,30 +58,23 @@ public class SCadastroAluno extends Pessoa {
         System.out.print("Digite o nome do titular do cartão: ");
         String nomeTitular = scanner.nextLine();
 
-        // Usar método seguro para ler o código de segurança como um número inteiro
         System.out.print("Digite o código de segurança do cartão: ");
         int codigoSeguranca = lerInteiro(scanner);
 
         Cartao cartao = new Cartao(numeroCartao, validade, nomeTitular, codigoSeguranca);
 
         if (processadorPagamento.processarPagamento(cartao, 50.0)) {
-            alunos.add(new SCadastroAluno(nome, id, cpf, senha, email, endereco, telefone));
+            SCadastroAluno novoAluno = new SCadastroAluno(nome, novoId, cpf, senha, email, endereco, telefone);
+            alunos.add(novoAluno);
 
-            try (FileWriter fileWriter = new FileWriter("pessoas.json")) {
-                Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                String json = gson.toJson(alunos);
-                fileWriter.write(json);
-                fileWriter.flush();
-                System.out.println("Dados armazenados em pessoas.json");
-
-            } catch (IOException e) {
-                System.err.println("Erro ao escrever no arquivo: " + e.getMessage());
-            }
+            salvarAlunos(alunos);
+            System.out.println("Aluno cadastrado e dados armazenados em pessoas.json.");
         } else {
             System.out.println("Pagamento não aprovado. Cadastro não concluído.");
         }
     }
 
+    // Método seguro para ler um número inteiro do scanner
     private static int lerInteiro(Scanner scanner) {
         while (true) {
             try {
@@ -123,6 +83,29 @@ public class SCadastroAluno extends Pessoa {
                 System.out.print("Entrada inválida! Por favor, digite um número inteiro: ");
                 scanner.nextLine();
             }
+        }
+    }
+
+    // Método para carregar alunos do arquivo JSON
+    private static List<SCadastroAluno> carregarAlunos() {
+        try (BufferedReader br = new BufferedReader(new FileReader("pessoas.json"))) {
+            Gson gson = new Gson();
+            Type listType = new TypeToken<List<SCadastroAluno>>() {}.getType();
+            List<SCadastroAluno> alunos = gson.fromJson(br, listType);
+            return alunos != null ? alunos : new ArrayList<>();
+        } catch (IOException e) {
+            System.out.println("Arquivo não encontrado, começando uma nova lista de alunos.");
+            return new ArrayList<>();
+        }
+    }
+
+    // Método para salvar lista de alunos no arquivo JSON
+    private static void salvarAlunos(List<SCadastroAluno> alunos) {
+        try (FileWriter writer = new FileWriter("pessoas.json")) {
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            writer.write(gson.toJson(alunos));
+        } catch (IOException e) {
+            System.out.println("Erro ao salvar alunos: " + e.getMessage());
         }
     }
 }

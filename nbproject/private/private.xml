@@ -3,26 +3,25 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/joaop/Desktop/Poo-master/src/Financeiro/AutenticacaoAdministrador.java</file>
-            <file>file:/C:/Users/joaop/Desktop/Poo-master/src/Financeiro/BalancoAcademia.java</file>
             <file>file:/C:/Users/joaop/Desktop/Poo-master/src/Agendamento/AreaAgendamento.java</file>
-            <file>file:/C:/Users/joaop/Desktop/Poo-master/src/Financeiro/PagamentoFuncionario.java</file>
+            <file>file:/C:/Users/joaop/Desktop/Poo-master/src/Registrar_nova_Pessoa/AreaLogin.java</file>
+            <file>file:/C:/Users/joaop/Desktop/Poo-master/src/Registrar_nova_Pessoa/GestaoCadastroFacade.java</file>
             <file>file:/C:/Users/joaop/Desktop/Poo-master/src/Registrar_nova_Pessoa/SCadastrofuncionario.java</file>
             <file>file:/C:/Users/joaop/Desktop/Poo-master/src/Agendamento/MensalidadeAluno.java</file>
+            <file>file:/C:/Users/joaop/Desktop/Poo-master/src/Pagamento/ProcessadorPagamentoImpl.java</file>
             <file>file:/C:/Users/joaop/Desktop/Poo-master/src/Registrar_nova_Pessoa/SCadastroAluno.java</file>
-            <file>file:/C:/Users/joaop/Desktop/Poo-master/src/Financeiro/Administrador.java</file>
             <file>file:/C:/Users/joaop/Desktop/Poo-master/src/Agendamento/AdicionarMensalidade.java</file>
-            <file>file:/C:/Users/joaop/Desktop/Poo-master/src/Loja/EscolhaSetor.java</file>
-            <file>file:/C:/Users/joaop/Desktop/Poo-master/src/Financeiro/FinanceiroFacade.java</file>
-            <file>file:/C:/Users/joaop/Desktop/Poo-master/src/projetoacademia/Main.java</file>
+            <file>file:/C:/Users/joaop/Desktop/Poo-master/src/Pagamento/ProcessadorPagamento.java</file>
             <file>file:/C:/Users/joaop/Desktop/Poo-master/src/Agendamento/ListarAgenda.java</file>
+            <file>file:/C:/Users/joaop/Desktop/Poo-master/src/Loja/EscolhaSetor.java</file>
             <file>file:/C:/Users/joaop/Desktop/Poo-master/src/Registrar_nova_Pessoa/Pessoa.java</file>
             <file>file:/C:/Users/joaop/Desktop/Poo-master/src/Agendamento/ConfirmarAgendamento.java</file>
-            <file>file:/C:/Users/joaop/Desktop/Poo-master/src/Financeiro/AreaFinancas.java</file>
+            <file>file:/C:/Users/joaop/Desktop/Poo-master/src/Registrar_nova_Pessoa/EditorCadastro.java</file>
             <file>file:/C:/Users/joaop/Desktop/Poo-master/src/Loja/ConsultaEstoque.java</file>
-            <file>file:/C:/Users/joaop/Desktop/Poo-master/src/Financeiro/GerenciadorPagamentosFuncionarios.java</file>
-            <file>file:/C:/Users/joaop/Desktop/Poo-master/src/Agendamento/Agendamento.java</file>
+            <file>file:/C:/Users/joaop/Desktop/Poo-master/src/Loja/GerenciamentoProduto.java</file>
+            <file>file:/C:/Users/joaop/Desktop/Poo-master/src/Registrar_nova_Pessoa/DeletarAluno.java</file>
             <file>file:/C:/Users/joaop/Desktop/Poo-master/src/Agendamento/GerenciadorMensalidades.java</file>
+            <file>file:/C:/Users/joaop/Desktop/Poo-master/src/Registrar_nova_Pessoa/DeletarFuncionario.java</file>
         </group>
     </open-files>
 </project-private>
