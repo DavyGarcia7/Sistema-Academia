@@ -20,7 +20,7 @@ public class EditarAlunos {
     // Método para editar um aluno existente com base no ID
     public static void editarAluno(int id) {
         List<SCadastroAluno> alunos = carregarAlunos();
-        
+
         if (alunos == null || alunos.isEmpty()) {  // Verificar se a lista é nula ou vazia
             System.out.println("Não há alunos registrados para editar.");
             return;
@@ -43,18 +43,6 @@ public class EditarAlunos {
             System.out.print("CPF (" + alunoEncontrado.getCpf() + "): ");
             String novoCpf = scanner.nextLine();
             if (!novoCpf.isBlank()) alunoEncontrado.setCpf(novoCpf);
-
-            System.out.print("Email (" + alunoEncontrado.getEmail() + "): ");
-            String novoEmail = scanner.nextLine();
-            if (!novoEmail.isBlank()) alunoEncontrado.setEmail(novoEmail);
-
-            System.out.print("Endereço (" + alunoEncontrado.getEndereco() + "): ");
-            String novoEndereco = scanner.nextLine();
-            if (!novoEndereco.isBlank()) alunoEncontrado.setEndereco(novoEndereco);
-
-            System.out.print("Telefone (" + alunoEncontrado.getTelefone() + "): ");
-            String novoTelefone = scanner.nextLine();
-            if (!novoTelefone.isBlank()) alunoEncontrado.setTelefone(novoTelefone);
 
             salvarAlunos(alunos);
             System.out.println("Aluno atualizado com sucesso.");
@@ -89,5 +77,13 @@ public class EditarAlunos {
         } catch (IOException e) {
             System.out.println("Erro ao salvar alunos: " + e.getMessage());
         }
+    }
+
+    @Override
+    public String toString() {
+        return "EditarAlunos{" +
+                "ARQUIVO_ALUNOS='" + ARQUIVO_ALUNOS + '\'' +
+                ", scanner=" + scanner +
+                '}';
     }
 }

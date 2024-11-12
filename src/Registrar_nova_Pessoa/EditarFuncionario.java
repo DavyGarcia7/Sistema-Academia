@@ -44,14 +44,6 @@ public class EditarFuncionario {
             String novoCpf = scanner.nextLine();
             if (!novoCpf.isBlank()) funcionarioEncontrado.setCpf(novoCpf);
 
-            System.out.print("Setor (" + funcionarioEncontrado.getSetor() + "): ");
-            String novoSetor = scanner.nextLine();
-            if (!novoSetor.isBlank()) funcionarioEncontrado.setSetor(novoSetor);
-
-            System.out.print("Horários (" + funcionarioEncontrado.getHorarios() + "): ");
-            String novosHorarios = scanner.nextLine();
-            if (!novosHorarios.isBlank()) funcionarioEncontrado.setHorarios(novosHorarios);
-
             salvarFuncionarios(funcionarios);
             System.out.println("Funcionário atualizado com sucesso.");
         } else {
@@ -85,5 +77,13 @@ public class EditarFuncionario {
         } catch (IOException e) {
             System.out.println("Erro ao salvar funcionários: " + e.getMessage());
         }
+    }
+
+    @Override
+    public String toString() {
+        return "EditarFuncionario{" +
+                "ARQUIVO_FUNCIONARIOS='" + ARQUIVO_FUNCIONARIOS + '\'' +
+                ", scanner=" + scanner +
+                '}';
     }
 }

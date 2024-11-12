@@ -2,10 +2,11 @@ package Registrar_nova_Pessoa;
 
 public class Pessoa {
     private String nome;
-    protected int id;  // Alterado para protected para permitir acesso em subclasses
+    private int id;
     private String cpf;
     private String senha;
 
+    // Construtor atualizado com `id` como int
     public Pessoa(String nome, int id, String cpf, String senha) {
         this.nome = nome;
         this.id = id;
@@ -13,7 +14,7 @@ public class Pessoa {
         this.senha = senha;
     }
 
-    // Getters e Setters para acessar os campos privados, se necessário
+    // Getters e Setters
     public String getNome() {
         return nome;
     }
@@ -44,4 +45,15 @@ public class Pessoa {
 
     public void setSenha(String senha) {
         this.senha = senha;
-    }}
+    }
+
+    @Override
+    public String toString() {
+        return "Pessoa{" +
+                "nome='" + nome + '\'' +
+                ", id=" + id +
+                ", cpf='" + cpf + '\'' +
+                ", senha='" + senha + '\'' +
+                '}';
+    }
+}

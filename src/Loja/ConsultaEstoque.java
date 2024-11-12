@@ -23,8 +23,18 @@ public class ConsultaEstoque {
     public void listarEstoque() {
         System.out.println("Estoque atual:");
         for (ProdutosLoja produto : produtos) {
-            System.out.println("ID: " + produto.getId() + ", Nome: " + produto.getNome() +
-                    ", Quantidade: " + produto.getQuantidade() + ", Preço: " + produto.getPreco());
+            System.out.println(produto); // Chamando o toString() da classe ProdutosLoja
         }
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("ConsultaEstoque{produtos=[\n");
+        for (ProdutosLoja produto : produtos) {
+            builder.append(produto.toString()).append(",\n");
+        }
+        builder.append("]}");
+        return builder.toString();
     }
 }

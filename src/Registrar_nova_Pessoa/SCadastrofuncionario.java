@@ -3,105 +3,95 @@ package Registrar_nova_Pessoa;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class SCadastrofuncionario extends Pessoa {
-    
+    private static int contadorFuncionarios = 0;  // Contador de instâncias
     private String setor;
     private String horarios;
-    
-    // Construtor ajustado para incluir `id` como int, `setor`, e `horarios`
+
     public SCadastrofuncionario(String nome, int id, String cpf, String senha, String setor, String horarios) {
-        super(nome, id, cpf, senha); // `id` agora é um int
+        super(nome, id, cpf, senha);
         this.setor = setor;
         this.horarios = horarios;
+        contadorFuncionarios++;
     }
 
-    // Getters e Setters
-    public String getSetor() {
-        return setor;
+    public static int getContadorFuncionarios() {
+        return contadorFuncionarios;
     }
 
-    public void setSetor(String setor) {
-        this.setor = setor;
+    @Override
+    public String toString() {
+        return "SCadastrofuncionario{" +
+                "nome='" + getNome() + '\'' +
+                ", id=" + getId() +
+                ", cpf='" + getCpf() + '\'' +
+                ", senha='" + getSenha() + '\'' +
+                ", setor='" + setor + '\'' +
+                ", horarios='" + horarios + '\'' +
+                '}';
     }
 
-    public String getHorarios() {
-        return horarios;
-    }
-
-    public void setHorarios(String horarios) {
-        this.horarios = horarios;
-    }
-    
     public static void CadastroF() {
         Scanner scanner = new Scanner(System.in);
-        List<SCadastrofuncionario> funcionarios = new ArrayList<>();
-        
-        // Tentar ler o arquivo existente
-        try (BufferedReader br = new BufferedReader(new FileReader("funcionarios.json"))) {
-            Gson gson = new Gson();
-            Type listType = new TypeToken<List<SCadastrofuncionario>>() {}.getType();
-            funcionarios = gson.fromJson(br, listType);
-            if (funcionarios == null) {
-                funcionarios = new ArrayList<>();
-            }
-        } catch (IOException e) {
-            // Se o arquivo não existir, começamos com uma nova lista
-            System.out.println("Arquivo não encontrado, começando uma nova lista.");
+        List<SCadastrofuncionario> funcionarios = carregarFuncionarios();
+
+        if (funcionarios == null) {
             funcionarios = new ArrayList<>();
         }
 
-        // Solicitar dados do funcionário
+        int id = funcionarios.size() + 1;
         System.out.print("Digite o nome: ");
         String nome = scanner.nextLine();
-        
-        // Gerar um ID único como inteiro
-        int id = funcionarios.size() + 1; // ID numérico baseado no tamanho da lista existente
-        
         System.out.print("Digite o CPF: ");
         String cpf = scanner.nextLine();
-        
         System.out.print("Digite a senha: ");
         String senha = scanner.nextLine();
-        
-        System.out.print("Digite o setor:\n1. Novo Instrutor\n2. Novo Auxiliar de Limpeza\n3. Novo Secretario/Balconista\n4. Sair\nOpção: ");
-        String opcao = scanner.nextLine();
-        String setor = switch (opcao) {
+        String setor = selecionarSetor(scanner);
+        System.out.print("Digite os horários: ");
+        String horarios = scanner.nextLine();
+
+        SCadastrofuncionario novoFuncionario = new SCadastrofuncionario(nome, id, cpf, senha, setor, horarios);
+        funcionarios.add(novoFuncionario);
+        salvarFuncionarios(funcionarios);
+        System.out.println("Dados armazenados em funcionarios.json");
+    }
+
+    private static String selecionarSetor(Scanner scanner) {
+        System.out.print("Digite o setor:\n1. Instrutor\n2. Auxiliar de Limpeza\n3. Secretario/Balconista\nOpção: ");
+        return switch (scanner.nextLine()) {
             case "1" -> "Instrutor";
             case "2" -> "Auxiliar de Limpeza";
             case "3" -> "Secretario/Balconista";
-            case "4" -> "Sair";
-            default -> "Opção inválida";
+            default -> "Setor Desconhecido";
         };
+    }
 
-        if (!setor.equals("Opção inválida") && !setor.equals("Sair")) {
-            System.out.println("Setor selecionado: " + setor);
-        } else if (setor.equals("Opção inválida")) {
-            System.out.println("Opção inválida");
-            return; // Encerrar a função em caso de opção inválida
+    public static List<SCadastrofuncionario> carregarFuncionarios() {
+        try (BufferedReader br = new BufferedReader(new FileReader("funcionarios.json"))) {
+            Gson gson = new Gson();
+            Type listType = new TypeToken<List<SCadastrofuncionario>>() {}.getType();
+            List<SCadastrofuncionario> funcionarios = gson.fromJson(br, listType);
+
+            if (funcionarios == null) {
+                funcionarios = new ArrayList<>();
+            }
+            return funcionarios;
+        } catch (IOException e) {
+            System.out.println("Erro ao carregar funcionários: " + e.getMessage());
+            return new ArrayList<>();
         }
-        
-        System.out.print("Digite os horários: ");
-        String horarios = scanner.nextLine();
-        
-        // Criar um objeto SCadastrofuncionario e adicionar à lista
-        funcionarios.add(new SCadastrofuncionario(nome, id, cpf, senha, setor, horarios));
+    }
 
-        // Escrever de volta para o arquivo
+    private static void salvarFuncionarios(List<SCadastrofuncionario> funcionarios) {
         try (FileWriter fileWriter = new FileWriter("funcionarios.json")) {
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            String json = gson.toJson(funcionarios);
-            fileWriter.write(json);
-            fileWriter.flush();
-            System.out.println("Dados armazenados em funcionarios.json");
+            fileWriter.write(gson.toJson(funcionarios));
         } catch (IOException e) {
             System.err.println("Erro ao escrever no arquivo: " + e.getMessage());
         }

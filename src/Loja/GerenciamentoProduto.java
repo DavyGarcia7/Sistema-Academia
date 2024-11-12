@@ -84,4 +84,16 @@ public class GerenciamentoProduto {
             System.out.println("Arquivo 'loja.json' não encontrado. Iniciando com estoque vazio.");
         }
     }
+
+    // Sobrescrevendo o método toString() para exibir informações sobre os produtos gerenciados
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("GerenciamentoProduto{\n");
+        for (ProdutosLoja produto : produtos) {
+            sb.append("\t").append(produto.toString()).append("\n");
+        }
+        sb.append("}");
+        return sb.toString();
+    }
 }

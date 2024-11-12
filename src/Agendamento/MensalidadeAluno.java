@@ -37,4 +37,14 @@ public class MensalidadeAluno {
     public void setDataPagamento(Date dataPagamento) {
         this.dataPagamento = dataPagamento;
     }
+
+    // Método toString
+    @Override
+    public String toString() {
+        return "MensalidadeAluno{" +
+                "alunoId=" + alunoId +
+                ", valorPago=" + valorPago +
+                ", dataPagamento=" + dataPagamento +
+                '}';
+    }
 }

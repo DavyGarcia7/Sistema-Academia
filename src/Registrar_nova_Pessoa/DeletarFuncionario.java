@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Iterator;
 
-public class DeletarFuncionario extends Pessoa{
+public class DeletarFuncionario extends Pessoa {
     private static final String NOME_ARQUIVO = "funcionarios.json";
     private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
@@ -61,7 +61,19 @@ public class DeletarFuncionario extends Pessoa{
         }
     }
 
-   public DeletarFuncionario(String nome, int id, String cpf, String senha) {
-    super(nome, id, cpf, senha);  
-}
+    public DeletarFuncionario(String nome, int id, String cpf, String senha) {
+        super(nome, id, cpf, senha);
+    }
+
+    @Override
+    public String toString() {
+        return "DeletarFuncionario{" +
+                "nome='" + getNome() + '\'' +
+                ", id=" + getId() +
+                ", cpf='" + getCpf() + '\'' +
+                ", senha='" + getSenha() + '\'' +
+                ", NOME_ARQUIVO='" + NOME_ARQUIVO + '\'' +
+                ", gson=" + gson +
+                '}';
+    }
 }

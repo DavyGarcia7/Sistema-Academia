@@ -7,9 +7,9 @@
   {
     "setor": "Banco",
     "horarios": "323",
-    "nome": "bruno",
+    "nome": "brunin",
     "id": 2,
-    "cpf": "24232"
+    "cpf": "2423423"
   },
   {
     "nome": "Daniel Rocha",
@@ -139,5 +139,13 @@
     "nome": "1",
     "id": 0,
     "cpf": "123"
+  },
+  {
+    "setor": "Instrutor",
+    "horarios": "23423",
+    "nome": "roberto",
+    "id": 28,
+    "cpf": "4523432423",
+    "senha": "PEDRO"
   }
 ]

@@ -33,7 +33,7 @@ public class AreaLoja {
             scanner.nextLine(); // Consumir a quebra de linha
 
             switch (opcao) {
-                case 1:                   
+                case 1:
                     adicionarProduto();
                     break;
                 case 2:
@@ -117,5 +117,13 @@ public class AreaLoja {
         System.out.println("Importando produtos do arquivo 'data/loja.json'...");
         gerenciamentoProduto.carregarProdutosDeArquivo();
         System.out.println("Produtos importados com sucesso.");
+    }
+
+    @Override
+    public String toString() {
+        return "AreaLoja{" +
+                "gerenciamentoProduto=" + gerenciamentoProduto +
+                ", consultaEstoque=" + consultaEstoque +
+                '}';
     }
 }

@@ -1,6 +1,5 @@
 package Agendamento;
 
-
 import Registrar_nova_Pessoa.SCadastroAluno;
 
 public class Agendamento {
@@ -10,9 +9,11 @@ public class Agendamento {
     private double preco;
     private String instrutor;
     private boolean confirmado;
+    protected int id;
 
-    public Agendamento(SCadastroAluno aluno, String tipoAula, String data, double preco, String instrutor) {
+    public Agendamento(SCadastroAluno aluno,int id, String tipoAula, String data, double preco, String instrutor) {
         this.nomeAluno = aluno.getNome();
+        this.id = id;
         this.tipoAula = tipoAula;
         this.data = data;
         this.preco = preco;
@@ -73,7 +74,24 @@ public class Agendamento {
     public void setInstrutor(String instrutor) {
         this.instrutor = instrutor;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    @Override
+    public String toString() {
+        return "Agendamento{" +
+                "Nome do Aluno='" + nomeAluno + '\'' +
+                ", Tipo de Aula='" + tipoAula + '\'' +
+                ", Data='" + data + '\'' +
+                ", Preço=R$" + preco +
+                ", Instrutor='" + instrutor + '\'' +
+                ", Confirmado=" + (confirmado ? "Sim" : "Não") +
+                ", id= " + id +'}';
+    }
 }
-
-
-

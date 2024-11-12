@@ -12,6 +12,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -32,7 +33,25 @@ public class GerenciadorMensalidades {
     public GerenciadorMensalidades() {
         this(null);  // Chama o construtor principal com null
     }
+   public boolean verificarMensalidadePaga(int alunoId) {
+        Calendar calendarioAtual = Calendar.getInstance();
+        int mesAtual = calendarioAtual.get(Calendar.MONTH);
+        int anoAtual = calendarioAtual.get(Calendar.YEAR);
 
+        for (MensalidadeAluno mensalidade : listarMensalidadesPorAluno(alunoId)) {
+            Calendar calendarioMensalidade = Calendar.getInstance();
+            calendarioMensalidade.setTime(mensalidade.getDataPagamento());
+
+            int mesMensalidade = calendarioMensalidade.get(Calendar.MONTH);
+            int anoMensalidade = calendarioMensalidade.get(Calendar.YEAR);
+
+            // Verifica se a mensalidade foi paga no mês e ano atuais
+            if (mesMensalidade == mesAtual && anoMensalidade == anoAtual) {
+                return true;  // Mensalidade do mês atual encontrada, está paga
+            }
+        }
+        return false;  // Nenhuma mensalidade do mês atual encontrada
+    }
     // Carrega as mensalidades do arquivo JSON
     private List<MensalidadeAluno> carregarMensalidadesDoArquivo() {
         try (FileReader reader = new FileReader(ARQUIVO_MENSALIDADES)) {
@@ -98,6 +117,7 @@ public class GerenciadorMensalidades {
 
     // Calcula o total de mensalidades
     public double calcularTotalMensalidades() {
+        this.mensalidades = carregarMensalidadesDoArquivo();
         double total = 0;
         for (MensalidadeAluno mensalidade : mensalidades) {
             total += mensalidade.getValorPago();
